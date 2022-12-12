@@ -1,0 +1,114 @@
+﻿<Window x:Class="Prakt13.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prakt13"
+        mc:Ignorable="d"
+        Title="Практическая 13" Height="460" Width="400" Icon="/Image/mainwindow.png" Loaded="Window_Load" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" MinHeight="460" MinWidth="400" Closing="Window_Closing">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="White" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid x:Name="MainGrid" Background="#FFFFFBCD">
+
+
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" ></ColumnDefinition>
+                <ColumnDefinition Width="1*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Menu Background="Transparent" Grid.Row="0" Grid.Column="1" >
+                <MenuItem Header="Задание"  VerticalAlignment="Top" HorizontalAlignment="Stretch" ToolTip="Выводит информацию о задаче программы " Click="Task_Click" Height="30"></MenuItem>
+                <MenuItem Header="Опции" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Опции программы" Height="30" >
+                    <MenuItem Header="Стандартная" Click="StandartTheme" ></MenuItem>
+                    <MenuItem Header="Градиент" Click="GradientThene" ></MenuItem>
+                    <MenuItem Header="Сохранить конфигурацию" Click="Savecfg"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Выход" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Close"  ToolTip="Закончить работу с программой" Height="30"></MenuItem>
+            </Menu>
+            <ToolBar Background="Transparent" Height="30"  VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" >
+                <Button x:Name="Save" ToolTip="Сохраняет массив в txt файл" Click="Save_Click">
+                    <Image Source="./Image/save.png"></Image>
+                </Button>
+                <Button x:Name="Upload" ToolTip="Загружает массив из txt файла" Click="Upload_Click">
+                    <Image Source="./Image/upload.png"></Image>
+                </Button>
+                <Button x:Name="Clean" ToolTip="Производит очистку массива" Click="Clean_Click">
+                    <Image Source="./Image/clean.png"></Image>
+                </Button>
+                <Button x:Name="Match" ToolTip="Производит решение на основе массива в таблице" Click="Match_Click">
+                    <Image Source="./Image/match.png"></Image>
+                </Button>
+            </ToolBar>
+        </Grid>
+
+        <Grid Margin="0,24,0,29">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="1*" ></RowDefinition>
+                <RowDefinition Height="100" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Резульат"  Background="Transparent" Grid.Row="0" Grid.Column="0" >
+                <Grid>
+                    <DataGrid x:Name="MatrixDG" Background="Transparent" Margin="0,0,132,0" BeginningEdit="MatrixDG_BeginningEdit" Height="Auto" Width="Auto" ></DataGrid>
+                    <TextBox x:Name="AVG" HorizontalAlignment="Right" VerticalAlignment="Top" TextWrapping="Wrap" Width="127">
+                        <FrameworkElement.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Копировать" Click="CopyRez_Click" ></MenuItem>
+                            </ContextMenu>
+                        </FrameworkElement.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Исходные данные" Grid.Row="1" Grid.Column="0" >
+                <FrameworkElement.ContextMenu>
+                    <ContextMenu>
+
+                    </ContextMenu>
+                </FrameworkElement.ContextMenu>
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Grid.Row="1" ToolTip="Колличество столбцов в матрице " x:Name="Column" HorizontalAlignment="Center"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" MinWidth="120" MinHeight="18" TextChanged="Column_TextChanged"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" ToolTip="Колличество строк в матрице " x:Name="Row" HorizontalAlignment="Center"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" MinWidth="120" MinHeight="18" TextChanged="Row_TextChanged"/>
+                    <Label Grid.Column="1" Content="Кол-во строк" HorizontalAlignment="Center" VerticalAlignment="Top" Height="28" Margin="0,11,0,0" Grid.RowSpan="2"/>
+                    <Label Content="Кол-во столбцов" HorizontalAlignment="Center" VerticalAlignment="Top" Height="28" Margin="0,11,0,0" Grid.RowSpan="2"/>
+
+
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+
+        <StatusBar  Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+            <StatusBarItem>
+                <TextBox x:Name="RowC" Text="Row 0" Background="Transparent"></TextBox>
+            </StatusBarItem>
+
+            <StatusBarItem>
+                <TextBox x:Name="ColC" Text="Column 0" Background="Transparent"></TextBox>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBox x:Name="IndexArrayStatus" Text="(0;0)" Background="Transparent"></TextBox>
+
+            </StatusBarItem>
+        </StatusBar>
+
+
+
+    </Grid>
+</Window>
